@@ -17,3 +17,5 @@ var socket = io();
            socket.on('newMessage', function(anyparameter){
                console.log("For recieving email from server", anyparameter);  
            })
+
+           
