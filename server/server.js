@@ -17,15 +17,22 @@ io.on('connection',(socket)=>{
     console.log("New User Connected...");
 
     //Here we are emiting custom events through socket.emit()
-    socket.emit('newMessage', {
-        name: 'Manish Bros',
-        email: 'moongerraja@gmail.com',
-        message: 'Mil kar khushi hui'
-    });
+    // socket.emit('newMessage', {
+    //     name: 'Manish Bros',
+    //     email: 'moongerraja@gmail.com',
+    //     message: 'Mil kar khushi hui'
+    // });
 
     //Here we are listening custom event through socket.on()
     socket.on('sendMessage', (anyparameter) => {
         console.log("Data here", anyparameter);
+        
+      //socket.io is used for broadcast the message to every single connection  
+        io.emit('newMessage', {
+            from: anyparameter.from,
+            message: anyparameter.message,
+            time: new Date().getTime()
+        })
     })
 
 socket.on('disconnect',()=>{
